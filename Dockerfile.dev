@@ -1,0 +1,29 @@
+FROM php:8.2-fpm
+
+RUN rm -rf /var/www/html
+
+WORKDIR /var/www
+
+RUN apt update && apt upgrade -y && \
+apt install libzip-dev libpq-dev -y
+
+RUN docker-php-ext-install zip \
+                            pdo \ 
+                            pdo_pgsql \
+                            pgsql
+
+RUN curl -s https://getcomposer.org/installer | php
+
+RUN mv composer.phar /usr/local/bin/composer
+
+RUN usermod -u 1000 www-data
+
+RUN chown -R 1000:1000 /var/www
+
+ENTRYPOINT [ "php", "/var/www/artisan", "serve", "--host=0.0.0.0", "--port=8000" ]
+
+# CMD ["php-fpm"]
+
+# EXPOSE 8000
+
+# RUN composer create-project laravel/laravel /var/www/src

@@ -1,0 +1,36 @@
+services:
+  app:
+    container_name: distribuidora_app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: laravel:dev
+    volumes:
+      - .:/var/www
+    ports:
+      - 5000:8000
+    networks:
+      - api_network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: distribuidora_db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: api_db
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5470:5432
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    name: api_network
+    driver: bridge
