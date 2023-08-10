@@ -2,9 +2,10 @@
 
 namespace App\Packages\User\Domain\Model;
 
-use Illuminate\Foundation\Auth\User as Authentication;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authentication;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -20,6 +21,7 @@ class User extends Authentication
         'name',
         'email',
         'phone_number',
+        'address_id',
     ];
 
     protected $hidden = [
@@ -31,4 +33,9 @@ class User extends Authentication
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
 }

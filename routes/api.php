@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/ping', [Controller::class, 'index']);
 Route::get('/users', [Controller::class, 'listUsers']);
+Route::post('/user', [Controller::class, 'createOne']);

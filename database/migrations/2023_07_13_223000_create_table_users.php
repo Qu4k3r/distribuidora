@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
 //            $table->uuid('common_congregation_id');
+            $table->uuid('address_id');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
 //            $table->foreign('common_congregation_id')->references('id')->on('common_congregations');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 
