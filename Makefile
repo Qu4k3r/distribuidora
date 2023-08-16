@@ -8,3 +8,6 @@ shell:
 	@docker-compose -f docker-compose.dev.yaml exec app bash
 
 help:
+
+run:
+	@docker-compose -f docker-compose.dev.yaml exec -T app sh -c "/var/www/artisan $(filter-out $@, $(MAKECMDGOALS))"

@@ -13,7 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /** @property string $city */
 class Address extends Model
 {
-    use HasUuids, HasFactory;
+    use HasUuids;
+    use HasFactory;
 
     protected $fillable = [
         'street',
