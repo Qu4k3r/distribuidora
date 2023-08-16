@@ -2,7 +2,9 @@
 
 namespace App\Packages\User\Domain\Model;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authentication;
@@ -15,12 +17,16 @@ use Laravel\Sanctum\HasApiTokens;
 /** @property string $password */
 class User extends Authentication
 {
-    use HasUuids, HasApiTokens, HasFactory, Notifiable;
+    use HasUuids;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'name',
         'email',
         'phone_number',
+        'password',
         'address_id',
     ];
 
@@ -37,5 +43,11 @@ class User extends Authentication
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
+    }
+
+    /** Create a new factory instance for the model.*/
+    protected static function newFactory(): Factory
+    {
+        return UserFactory::new();
     }
 }

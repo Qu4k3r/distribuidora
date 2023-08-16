@@ -1,7 +1,9 @@
 <?php
 
-use App\Models\User;
+use App\Packages\User\Domain\Model\Address;
+use App\Packages\User\Domain\Model\User;
 use App\Providers\RouteServiceProvider;
+use Tests\TestCase;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
@@ -10,7 +12,23 @@ test('login screen can be rendered', function () {
 });
 
 test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    // @todo: Fix this test using factories
+    /** @var TestCase $this */
+    $address = new Address([
+        'street' => 'Rua dos bobos numero 0',
+        'neighbourhood' => 'Vila do Esmero',
+        'state' => 'RJ',
+        'city' => 'Rio de Janeiro'
+    ]);
+    $address->save();
+    $user = new User([
+        'name' => 'Neves',
+        'email' => 'fake@bol.com.br',
+        'phone_number' => '11999999996',
+        'address_id' => $address->getKey(),
+        'password' => 'password',
+    ]);
+    $user->save();
 
     $response = $this->post('/login', [
         'email' => $user->email,
