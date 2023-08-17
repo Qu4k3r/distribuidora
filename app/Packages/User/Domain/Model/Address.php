@@ -2,6 +2,7 @@
 
 namespace App\Packages\User\Domain\Model;
 
+use Database\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,5 +29,10 @@ class Address extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    protected static function newFactory(): AddressFactory
+    {
+        return AddressFactory::new();
     }
 }
