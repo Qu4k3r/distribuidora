@@ -9,6 +9,7 @@ services:
       - .:/var/www
     ports:
       - 5000:8000
+      - 5173:5173
     networks:
       - api_network
     depends_on:

@@ -4,8 +4,11 @@ RUN rm -rf /var/www/html
 
 WORKDIR /var/www
 
-RUN apt update && apt upgrade -y && \
-apt install libzip-dev libpq-dev -y
+RUN apt update && apt upgrade -y
+
+RUN apt install libzip-dev libpq-dev -y
+
+RUN apt install nodejs npm -y
 
 RUN docker-php-ext-install zip \
                             pdo \
