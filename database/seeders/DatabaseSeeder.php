@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Packages\User\Domain\Model\Usuario;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\LaravelUser::factory(10)->create();
+        $this->seedUser();
+    }
 
-        \App\Models\LaravelUser::factory()->create([
+    public function seedUser(): void
+    {
+        Usuario::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => '',
         ]);
     }
 }

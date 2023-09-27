@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaravelUser;
-use App\Packages\User\Domain\Model\Address;
-use App\Packages\User\Domain\Model\User;
+use App\Packages\User\Domain\Model\Endereco;
+use App\Packages\User\Domain\Model\Usuario;
 use App\Packages\User\Repository\AddressRepository;
 use App\Packages\User\Repository\UserRepository;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
