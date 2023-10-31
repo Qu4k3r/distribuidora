@@ -12,7 +12,7 @@ class Igreja extends Model
 {
     use HasUuids, HasFactory;
 
-    protected array $fillable = [
+    protected $fillable = [
         'endereco_id',
         'apelido',
         'codigo',

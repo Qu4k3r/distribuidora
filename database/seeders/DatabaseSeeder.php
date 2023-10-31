@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Packages\User\Domain\Model\Usuario;
+use Database\Seeders\Produto\ProdutoSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,14 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->seedUser();
-    }
-
-    public function seedUser(): void
-    {
-        Usuario::factory()->create([
-            'name' => 'Test User',
-            'email' => '',
+        $this->call([
+            ProdutoSeeder::class,
         ]);
     }
 }
