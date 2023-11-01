@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Produto;
 
-use App\Packages\Produto\Domain\Model\Biblia;
+use App\Packages\Produto\Domain\Model\Produto;
 use App\Packages\Produto\Domain\Model\TipoProduto;
 use Illuminate\Database\Seeder;
 
@@ -13,24 +13,38 @@ class ProdutoSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->seedBiblia();
+        $this->seedProdutos();
     }
 
-    private function seedBiblia(): void
+    private function seedProdutos(): void
     {
-        $biblias = fopen(storage_path('seeds/produtos/biblias.tsv'), 'r');
-        // Skip header
-        fgets($biblias);
+        collect(TipoProduto::cases())->each(function (TipoProduto $tipoProduto) {
+            $tipo = $tipoProduto->value;
+            $produtos = fopen(storage_path("seeds/produtos/$tipo.tsv"), 'r');
 
-        while (($biblia = fgetcsv($biblias, 0, "\t")) !== false) {
-            Biblia::factory()->create([
-                'codigo' => $biblia[1],
-                'descricao' => $biblia[2],
-                'quantidade' => $biblia[0],
-                'tipo' => TipoProduto::BIBLIA_SAGRADA,
-                'valor' => $biblia[3],
-            ]);
-        }
-        fclose($biblias);
+            // Skip header
+            fgets($produtos);
+
+            while (($produto = fgetcsv($produtos, 0, "\t")) !== false) {
+                $produtoSistema = $this->getProdutoSistema($produto[1]);
+                if ($produtoSistema instanceof Produto) {
+                    continue;
+                }
+
+                Produto::factory()->create([
+                    'codigo' => $produto[1],
+                    'descricao' => $produto[2],
+                    'quantidade' => $produto[0],
+                    'tipo' => $tipo,
+                    'valor' => intval(floatval($produto[3]) * 100),
+                ]);
+            }
+            fclose($produtos);
+        });
+    }
+
+    private function getProdutoSistema(string $codigo): ?Produto
+    {
+        return Produto::where('codigo', $codigo)->first();
     }
 }

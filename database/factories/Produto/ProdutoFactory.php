@@ -15,7 +15,7 @@ class ProdutoFactory extends Factory
             'codigo' => (string) $this->faker->randomNumber(7, true),
             'descricao' => $this->faker->realText(30),
             'quantidade' => $this->faker->randomNumber(3),
-            'tipo' => $this->faker->randomElement([TipoProduto::BIBLIA_SAGRADA]),
+            'tipo' => $this->faker->randomElement([TipoProduto::BIBLIA]),
             'valor' => $this->faker->randomNumber(4),
         ];
     }
