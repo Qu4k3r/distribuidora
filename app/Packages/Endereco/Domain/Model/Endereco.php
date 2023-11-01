@@ -26,9 +26,4 @@ class Endereco extends Model
     {
         return $this->hasOne(Igreja::class);
     }
-
-    public function usuarios(): HasMany
-    {
-        return $this->hasMany(Usuario::class);
-    }
 }

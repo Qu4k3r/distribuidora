@@ -17,9 +17,9 @@ class Usuario extends Authentication
 
     // @todo: modificar migration na branch authentication
     protected $fillable = [
-        'endereco_id',
         'igreja_id',
         'nome',
+        'documento_principal',
         'email',
         'telefone',
     ];
