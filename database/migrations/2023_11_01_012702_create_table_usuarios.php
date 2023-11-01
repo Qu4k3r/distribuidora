@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('igrejas', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('endereco_id')->nullable();
-            $table->string('codigo')->unique();
-            $table->string('localidade')->nullable();
-            $table->string('complemento')->nullable();
+            $table->uuid('igreja_id');
+            $table->string('nome');
+            $table->string('documento_principal')->unique();
+            $table->string('email')->unique();
+            $table->integer('telefone')->unique();
             $table->timestamps();
 
-            $table->foreign('endereco_id')->references('id')->on('enderecos');
+            $table->foreign('igreja_id')->references('id')->on('igrejas');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('igrejas');
+        Schema::dropIfExists('usuarios');
     }
 };

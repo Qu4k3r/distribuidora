@@ -13,11 +13,11 @@ return new class extends Migration {
     {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->unsignedSmallInteger('cep');
             $table->string('bairro');
             $table->string('rua');
             $table->unsignedSmallInteger('numero');
             $table->text('complemento')->nullable();
-            $table->unsignedSmallInteger('cep');
             $table->timestamps();
         });
 
