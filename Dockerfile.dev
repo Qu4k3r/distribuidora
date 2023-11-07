@@ -23,6 +23,8 @@ RUN usermod -u 1000 www-data
 
 RUN chown -R 1000:1000 /var/www
 
+# Antes de fazer o primeiro build comentar a linha abaixo, entrar no container e rodar composer install
+# Depois de gerar a vendor, descomentar a linha abaixo e rodar o build novamente
 ENTRYPOINT [ "php", "/var/www/artisan", "serve", "--host=0.0.0.0", "--port=8000" ]
 
 # CMD ["php-fpm"]

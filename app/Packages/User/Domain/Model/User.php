@@ -2,7 +2,7 @@
 
 namespace App\Packages\User\Domain\Model;
 
-use Database\Factories\UserFactory;
+use Database\Factories\Usuario\UsuarioFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,6 +48,6 @@ class User extends Authentication
     /** Create a new factory instance for the model.*/
     protected static function newFactory(): Factory
     {
-        return UserFactory::new();
+        return UsuarioFactory::new();
     }
 }

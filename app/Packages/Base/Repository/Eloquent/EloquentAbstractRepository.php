@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class EloquentAbstractRepository implements BaseRepositoryInterface
 {
-    protected string $entityName;
-    protected Model $model;
+    protected string $entity;
+    private Model $model;
 
     public function __construct()
     {
-        $this->model = new $this->entityName;
+        $this->model = new $this->entity;
     }
 
     public function save(array $data): Model
