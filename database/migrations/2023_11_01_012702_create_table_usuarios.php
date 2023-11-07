@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('documento_principal')->unique();
             $table->string('email')->unique();
             $table->integer('telefone')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->timestamps();
 
             $table->foreign('igreja_id')->references('id')->on('igrejas');
